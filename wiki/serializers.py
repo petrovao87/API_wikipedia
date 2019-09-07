@@ -6,3 +6,9 @@ class NewNote(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = '__all__'
+
+
+class NoteList(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = ('id', 'title', 'url', 'user')

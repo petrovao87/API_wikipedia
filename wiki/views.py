@@ -18,13 +18,14 @@ class CreateNoteView(generics.CreateAPIView):
     #     return data
 
     serializer_class = NewNote
+    queryset = Note.objects.all()
 
     def create(self, request, *args, **kwargs):
         # print(request.data)
         # print(request.query_params)
         url = request.data['url']
         title = request.data['title']
-        print(url, title)
+        # print(url, title)
         try:
             w = wikipedia.WikipediaPage(title)
             content = w.content
@@ -32,11 +33,24 @@ class CreateNoteView(generics.CreateAPIView):
             links = w.links
             images = w.images
             # return self.create(request, *args, **kwargs)
-            data = json.dumps({'title': title, 'url': url, 'content': content, 'links': links, 'images': images}, )
-            print(data)
-            return self.create(url, title, content, categories, links, images, *args, **kwargs)
+            # data = json.dumps({'title': title, 'url': url, 'content': content, 'links': links, 'images': images})
+            user = self.get_queryset()
+            serializer = NewNote(data={'title': title, 'url': url, 'content': content, 'links': links, 'images': images})
+            # print(serializer)
+
+            # serializer = NewNote(data='data')
+            # print(data)
+            # user = self.get_object()
+            print(serializer.is_valid())
+            if serializer.is_valid():
+                print('_____'*100)
+                serializer.save()
+            #     return Response('data')
+            # return self.create(url, title, content, categories, links, images, *args, **kwargs)
+            return Response(data={'title': title, 'url': url, 'content': content, 'links': links, 'images': images},
+                            status=status.HTTP_201_CREATED)
         except wikipedia.PageError:
-            serializer = NewNote(data=request.data)
+            # serializer = NewNote(data=request.data)
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 

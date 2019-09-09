@@ -6,9 +6,9 @@ User = get_user_model()
 
 
 class Note(models.Model):
-    title = models.CharField(db_index=True,unique=True,  max_length=55)
+    title = models.CharField(db_index=True, unique=True,  max_length=55)
     url = models.CharField(unique=True, max_length=1000)
-    content = models.CharField(max_length=10000)
+    content = models.CharField(max_length=100000)
     categories = models.CharField(max_length=1000, default='No categories')
     links = models.CharField(max_length=1000, default='No links')
     images = models.CharField(max_length=1000, default='No images')

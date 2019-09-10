@@ -7,10 +7,12 @@ User = get_user_model()
 
 class Note(models.Model):
     title = models.CharField(db_index=True, unique=True,  max_length=55)
-    url = models.CharField(unique=True, max_length=1000)
-    content = models.CharField(max_length=100000)
-    categories = models.CharField(max_length=1000, default='No categories')
-    links = models.CharField(max_length=1000, default='No links')
-    images = models.CharField(max_length=1000, default='No images')
+    url = models.CharField(unique=True, max_length=250)
+    content = models.TextField(null=True)
+    categories = models.TextField(default='No categories')
+    links = models.TextField(default='No links')
+    images = models.TextField(default='No images')
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return '%s, %s' % (self.title, self.url)

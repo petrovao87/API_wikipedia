@@ -84,6 +84,7 @@ DATABASES = {
     }
 }
 
+# ERROR with psql and i dont know why (
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',

@@ -16,8 +16,10 @@ $ cd api_wikipedia
 ##### Virtual Environment install & activate
 ```
 $ pip install virtualenv
+$ python -m venv env  (for Windows systems)
+$ python3 -m venv env  (for Unix systems)
 $ env\scripts\activate  (for Windows systems)
-$ env\bin\activate  (for Unix systems)
+$ env/bin/activate  (for Unix systems)
 ```
 
 ##### Install the dependencies

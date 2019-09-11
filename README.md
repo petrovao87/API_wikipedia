@@ -63,7 +63,7 @@ $ manage.py runserver
 
 ### Add a new process
 ```
-/api/v0/note/<create/
+/api/v0/note/create/
 ```
 ### Parameters to send in your POST 
 ```

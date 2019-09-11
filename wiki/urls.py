@@ -8,6 +8,6 @@ urlpatterns = [
     path('note/create/', CreateNoteView.as_view()),
     path('note/all/', AllNoteView.as_view()),
     path('note/<int:pk>/', NoteView.as_view()),
-    path('/auth/', include('djoser.urls')),
-    path('/auth_token/', include('djoser.urls.authtoken')),
+    path('note/auth/', include('djoser.urls')),
+    path('note/auth_token/', include('djoser.urls.authtoken')),
 ]

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import generics, status
 from wiki.serializers import NewNote, NoteList, WikiSerializer
 from wiki.models import Note
@@ -23,6 +22,9 @@ class CreateNoteView(generics.CreateAPIView):
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         try:
             w = wikipedia.WikipediaPage(title)
+            if w.url != url:
+                data = {'info': 'your url doesnt match your request title'}
+                return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
             content = w.content
             categories = str(w.categories)
             links = str(w.links)
@@ -47,7 +49,7 @@ class CreateNoteView(generics.CreateAPIView):
                 return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         except wikipedia.PageError as e:
-            return Response(data={title: str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(data={'info': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         except wikipedia.DisambiguationError as e:
             data = {f'{e.title} may refer to:': e.options}
             return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
@@ -60,7 +62,7 @@ class AllNoteView(generics.ListAPIView):
 
 
 class NoteView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = NewNote
+    serializer_class = WikiSerializer
     queryset = Note.objects.all()
     # permission_classes = (IsAuthenticated, )
     # permission_classes = (IsOwnerOrReadOnly, IsAuthenticated)

@@ -19,8 +19,4 @@ class AuthorListViewTest(TestCase):
         print(resp)
         self.assertEqual(resp.status_code, 200)
 
-    def test_pagination_is_ten(self):
-        resp = self.client.get('/api/v0/wiki/note/all')
-        self.assertTrue(len(resp.context['note_list']) == 10)
-
 

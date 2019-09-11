@@ -4,7 +4,6 @@ from wiki.models import Note
 
 class NewNote(serializers.ModelSerializer):
     # user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    #
     class Meta:
         model = Note
         # fields = '__all__'

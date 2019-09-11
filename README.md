@@ -28,21 +28,6 @@ $ env/bin/activate  (for Unix systems)
 $ pip install -r requirements.txt
 ```
 
-#### Connection to your PostgreSQL server and Create the database 
-
-##### create connection to your db. Change file settings.py, DATABASE = ..
-```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'note_db',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
-        'PORT': '49928',
-    }
-}
-```
 ##### and create schemas
 ```
 $ manage.py migrate
